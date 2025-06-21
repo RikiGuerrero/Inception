@@ -38,8 +38,8 @@ server {
 	#
 	# include snippets/snakeoil.conf;
 	ssl_protocols TLSv1.2 TLSv1.3;
-	ssl_certificate ${CRED_PATH}/${SSL_CERT};
-	ssl_certificate_key ${CRED_PATH}/${SSL_KEY};
+	ssl_certificate etc/nginx/ssl/cert.pem;
+	ssl_certificate_key etc/nginx/ssl/key.pem;
 
 	root /var/www/html;
 

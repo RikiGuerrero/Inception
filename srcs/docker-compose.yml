@@ -1,12 +1,6 @@
-
 services:
   nginx:
-    build:
-      context: requirements/nginx/.
-      args:
-        CRED_PATH: ${CRED_PATH}
-        SSL_CERT: ${SSL_CERT}
-        SSL_KEY: ${SSL_KEY}
+    build: requirements/nginx/.
     container_name: nginx
     restart: on-failure
     depends_on:
@@ -15,8 +9,6 @@ services:
       - wordpress_data:/var/www/html
     ports:
       - "443:443"
-    env_file:
-      - .env
 
   wordpress:
     build: requirements/wordpress/.
