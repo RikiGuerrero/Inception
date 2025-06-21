@@ -19,13 +19,18 @@
 # Default server configuration
 #
 server {
-	#listen 80 default_server;
-	#listen [::]:80 default_server;
+	listen 80;
+	listen [::]:80;
+	server_name rguerrer.42.fr;
+	return 301 https://rguerrer.42.fr$request_uri;
+}
 
+# HTTPS server
+server {
 	# SSL configuration
 	#
-	 listen 443 ssl default_server;
-	 listen [::]:443 ssl default_server;
+	 listen 443 ssl;
+	 listen [::]:443 ssl;
 	#
 	# Note: You should disable gzip for SSL traffic.
 	# See: https://bugs.debian.org/773332
@@ -38,20 +43,20 @@ server {
 	#
 	# include snippets/snakeoil.conf;
 	ssl_protocols TLSv1.2 TLSv1.3;
-	ssl_certificate etc/nginx/ssl/cert.pem;
-	ssl_certificate_key etc/nginx/ssl/key.pem;
+	ssl_certificate /etc/nginx/ssl/ssl-cert.crt;
+	ssl_certificate_key /etc/nginx/ssl/ssl-cert.key;
 
 	root /var/www/html;
 
 	# Add index.php to the list if you are using PHP
-	index index.php index.html index.htm index.nginx-debian.html;
+	index index.php index.html index.htm;
 
-	server_name localhost;
+	server_name rguerrer.42.fr;
 
 	location / {
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
+		try_files $uri $uri/ /index.php?$args;
 	}
 
 	# pass PHP scripts to FastCGI server
@@ -62,7 +67,7 @@ server {
 		# With php-fpm (or other unix sockets):
 		# fastcgi_pass unix:/run/php/php7.4-fpm.sock;
 		# With php-cgi (or other tcp sockets):
-		fastcgi_pass wp-php:9000;
+		fastcgi_pass wordpress:9000;
 	}
 
 	# deny access to .htaccess files, if Apache's document root
