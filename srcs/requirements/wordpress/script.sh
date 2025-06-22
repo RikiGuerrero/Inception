@@ -1,4 +1,10 @@
 #!/bin/bash
+
+until mysqladmin ping -h"$DB_HOST" -u"root" --silent; do
+  echo "Esperando a la base de datos..."
+  sleep 2
+done
+
 cd /var/www/html
 if [ ! -f wp-config.php ]; then
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar

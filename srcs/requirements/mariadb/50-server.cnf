@@ -12,7 +12,7 @@
 # * Basic Settings
 #
 
-user                    = root
+user                    = mysql
 pid-file                = /run/mysqld/mysqld.pid
 basedir                 = /usr
 datadir                 = /var/lib/mysql
@@ -27,7 +27,7 @@ skip-external-locking
 
 # Instead of skip-networking the default is now to listen only on
 # localhost which is more compatible and is not less secure.
-bind-address            = mariadb
+bind-address            = 0.0.0.0
 
 #
 # * Fine Tuning
