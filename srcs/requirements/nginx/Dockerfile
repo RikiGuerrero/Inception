@@ -13,6 +13,6 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 -out /etc/nginx/ssl/ssl-cert.crt \
 -subj "/C=FR/ST=France/L=Paris/O=42/OU=42/CN=localhost"
 
-COPY default /etc/nginx/sites-available/default
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
 CMD ["nginx", "-g", "daemon off;"]
