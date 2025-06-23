@@ -9,4 +9,5 @@ COPY tools/script.sh /script.sh
 RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld && chown -R mysql:mysql /var/lib/mysql \
 	&& chmod 777 /var/run/mysqld && chmod +x /script.sh
 
+EXPOSE 3306
 CMD ["./script.sh"]
