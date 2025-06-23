@@ -21,9 +21,16 @@ if [ ! -f wp-config.php ]; then
 	./wp-cli.phar core install \
 		--url=https://rguerrer.42.fr \
 		--title=inception \
-		--admin_user=admin \
-		--admin_password=admin \
-		--admin_email=admin@admin.com \
+		--admin_user=$WP_ADMIN_USER \
+		--admin_password=$WP_ADMIN_PASS \
+		--admin_email=$WP_ADMIN_EMAIL \
+		--allow-root
+
+	./wp-cli.phar user create \
+		$WP_USER_USER \
+		$WP_USER_EMAIL \
+		--role=subscriber \
+		--user_pass=$WP_USER_PASS \
 		--allow-root
 fi
 

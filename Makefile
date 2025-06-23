@@ -7,12 +7,10 @@ all: up
 up:
 	mkdir -p $(DATA_PATH)/wordpress
 	mkdir -p $(DATA_PATH)/mariadb
-	@echo "DATA_PATH: $(DATA_PATH)" > srcs/.env.runtime
-	cat srcs/.env >> srcs/.env.runtime
-	docker-compose --env-file srcs/.env.runtime -f srcs/docker-compose.yml up -d --build
+	DATA_PATH=$(DATA_PATH) docker-compose --env-file srcs/.env -f srcs/docker-compose.yml up -d --build
 
 down:
-	docker-compose -f srcs/docker-compose.yml down
+	DATA_PATH=$(DATA_PATH) docker-compose -f srcs/docker-compose.yml down
 
 clean:
 	docker system prune -af
