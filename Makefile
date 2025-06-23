@@ -7,6 +7,8 @@ all: up
 up:
 	mkdir -p $(DATA_PATH)/wordpress
 	mkdir -p $(DATA_PATH)/mariadb
+	chown -R 1000:1000 $(DATA_PATH)/wordpress
+	chown -R 1000:1000 $(DATA_PATH)/mariadb
 	DATA_PATH=$(DATA_PATH) docker-compose --env-file srcs/.env -f srcs/docker-compose.yml up -d --build
 
 down:
