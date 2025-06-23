@@ -32,6 +32,16 @@ if [ ! -f wp-config.php ]; then
 		--role=subscriber \
 		--user_pass=$WP_USER_PASS \
 		--allow-root
+
+    # !!! AÑADIR ESTAS LÍNEAS !!!
+    echo "Cambiando permisos de los archivos de WordPress a www-data..."
+    chown -R www-data:www-data /var/www/html
+    # Es recomendable ajustar también los permisos de directorios a 755 y archivos a 644 para seguridad
+    find /var/www/html -type d -exec chmod 755 {} \;
+    find /var/www/html -type f -exec chmod 644 {} \;
+    chmod 640 /var/www/html/wp-config.php # Especialmente wp-config.php
+    # !!! FIN DE LAS LÍNEAS A AÑADIR !!!
+
 fi
 
 php-fpm7.4 -F
